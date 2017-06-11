@@ -2,12 +2,11 @@
 var React = require("react");
 
 // Create the Main component
-var Saved = React.createClass({
-
-  render: function() {
+class Saved extends React.Component {
+  render() {
     return(
-      // Render the page
 
+      // Render the page
       <div className="container">
 
         <div className="row">
@@ -15,12 +14,8 @@ var Saved = React.createClass({
             <div className="panel panel-default">
               <div className="panel-heading text-center"><h3>Saved</h3></div>
               <div className="panel-body text-center">
-
-
-
               </div>
             </div>
-
           </div>
         </div>
 
@@ -28,7 +23,7 @@ var Saved = React.createClass({
     );
   }
 
-});
+}
 
 // Export the Main component
 module.exports = Saved;

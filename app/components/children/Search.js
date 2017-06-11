@@ -2,12 +2,11 @@
 var React = require("react");
 
 // Create the Main component
-var Search = React.createClass({
-
-  render: function() {
+class Search extends React.Component {
+  render() {
     return(
-      // Render the page
 
+      // Render the page
       <div className="container">
 
         <div className="row">
@@ -15,12 +14,8 @@ var Search = React.createClass({
             <div className="panel panel-default">
               <div className="panel-heading text-center"><h3>Results</h3></div>
               <div className="panel-body text-center">
-
-
-
               </div>
             </div>
-
           </div>
         </div>
 
@@ -28,7 +23,7 @@ var Search = React.createClass({
     );
   }
 
-});
+}
 
 // Export the Main component
 module.exports = Search;
