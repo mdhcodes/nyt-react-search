@@ -5,14 +5,18 @@ var React = require("react");
 var Search = require("./children/Search");
 var Saved = require("./children/Saved");
 
+// Helper for making AJAX requests to our API
+var helpers = require("./utils/helpers");
+
 // Create the Main component
 class Main extends React.Component {
+
   render() {
     return(
 
       // Render the page
       <div className="container">
-        
+
         <div className="jumbotron">
           <h1 className="text-center">New York Times Article Scrubber</h1>
           <p className="text-center">Search for and annotate articles of interest!</p>
