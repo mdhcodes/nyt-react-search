@@ -28,9 +28,9 @@ class Results extends React.Component {
                 <div className="well" id="results-well">
 
                   {/* NYT Articles / Results Here */}
-                  <p>{this.props.title}</p>
-                  <p>{this.props.startYear}</p>
-                  <p>{this.props.endYear}</p>
+                  {/* Article Title */}
+                  {/* Article URL */}
+                  {/* Article Date */}
 
                 </div>
 
