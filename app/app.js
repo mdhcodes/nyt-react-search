@@ -2,8 +2,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-// Include the main component
+// Require routes
 var Main = require("./components/Main");
 
-// Render the Main component
-ReactDOM.render(<Main />, document.getElementById("app"));
+ReactDOM.render(<Main />, document.getElementById('app'));

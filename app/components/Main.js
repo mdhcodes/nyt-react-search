@@ -1,15 +1,53 @@
 // Require React
 var React = require("react");
 
-// Require child components
-var Search = require("./children/Search");
-var Saved = require("./children/Saved");
+// Include child components
+var Form = require("./children/Form");
+var Results = require('./children/Results');
 
 // Helper for making AJAX requests to our API
-var helpers = require("./utils/helpers");
+ var helpers = require("./utils/helpers");
 
 // Create the Main component
 class Main extends React.Component {
+
+  constructor(props) {
+    super(props); // super() sets the context for the keyword 'this'
+    this.state = {
+      topic: "",
+      startYear: "",
+      endYear: "",
+      results: []
+    };
+  }
+
+  setTopic(topic) {
+    this.setState({ topic: topic });
+  }
+
+  setStart(startYear) {
+    this.setState({ startYear: startYear });
+  }
+
+  setEnd(endYear) {
+    this.setState({ endYear: endYear });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // If a new search topic is found, run a new search
+    if (prevState.topic !== this.state.topic || prevState.startYear !== this.state.startYear || prevState.endYear !== this.state.endYear) {
+
+      console.log("UPDATED");
+
+      helpers.getNytData(this.state.topic, this.state.startYear, this.state.endYear).then(function(data) {
+        if (data !== this.state.results) {
+          console.log(data);
+          this.setState({ results: data });
+        }
+      });
+    }
+  }
+
 
   render() {
     return(
@@ -21,35 +59,19 @@ class Main extends React.Component {
           <h1 className="text-center">New York Times Article Scrubber</h1>
           <p className="text-center">Search for and annotate articles of interest!</p>
         </div>
-        <div className="row">
-          <div className="col-lg-10 col-lg-offset-1">
-            <div className="panel panel-default">
-              <div className="panel-heading text-center"><h3>Search</h3></div>
-              <div className="panel-body text-center">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="topic">Topic</label>
-                    <input type="text" className="form-control" id="topic" placeholder="Topic"/>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="startYear">Start Year</label>
-                    <input type="text" className="form-control" id="startYear" placeholder="Start Year"/>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="endYear">End Year</label>
-                    <input type="text" className="form-control" id="endYear" placeholder="End Year"/>
-                  </div>
-                  <button type="submit" className="btn btn-default" id="submitBtn">Search</button>
-                </form>
-              </div>
-            </div>
-          </div>
+
+        <div className="col-lg-10 col-lg-offset-1">
+            <Form setTopic={this.setTopic} setStart={this.setStart} setEnd={this.setEnd}/>
+        </div>
+
+        <div className="col-lg-10 col-lg-offset-1">
+            <Results nytResults={this.state.results} />
+
         </div>
 
       </div>
     );
   }
-
 }
 
 // Export the Main component
