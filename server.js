@@ -39,7 +39,14 @@ app.use(express.static("./public"));
 //====================================================
 // MongoDB configuration
 //====================================================
-mongoose.connect("mongodb://localhost/nytSearch");
+if(process.env.MONGODB_URI) {
+  // Heroku connection
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  // Localhost connection
+  mongoose.connect("mongodb://localhost/nytSearch");
+}
+
 var db = mongoose.connection;
 
 db.on("error", function(err) {
