@@ -19,7 +19,31 @@ class Main extends React.Component {
       endYear: "",
       results: []
     };
+    this.setTopic = this.setTopic.bind(this);
+    this.setStart = this.setStart.bind(this);
+    this.setEnd = this.setEnd.bind(this);
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    // If a new search topic is found, run a new search
+    if (prevState.topic !== this.state.topic || prevState.startYear !== this.state.startYear || prevState.endYear !== this.state.endYear) {
+
+      console.log('Topic', this.state.topic);
+      console.log('Start Year', this.state.startYear);
+      console.log('End Year', this.state.endYear);
+      console.log('UPDATED');
+
+      helpers.getNytData(this.state.topic, this.state.startYear, this.state.endYear).then(function(data) {
+        if (data !== this.state.results) {
+          console.log('Data', data);
+          this.setState({ results: data });
+        } else {
+          console.log('Data', 'No data here!');
+        }
+      });
+    }
+  }
+
 
   setTopic(topic) {
     this.setState({ topic: topic });
@@ -32,22 +56,6 @@ class Main extends React.Component {
   setEnd(endYear) {
     this.setState({ endYear: endYear });
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    // If a new search topic is found, run a new search
-    if (prevState.topic !== this.state.topic || prevState.startYear !== this.state.startYear || prevState.endYear !== this.state.endYear) {
-
-      console.log("UPDATED");
-
-      helpers.getNytData(this.state.topic, this.state.startYear, this.state.endYear).then(function(data) {
-        if (data !== this.state.results) {
-          console.log(data);
-          this.setState({ results: data });
-        }
-      });
-    }
-  }
-
 
   render() {
     return(
@@ -66,7 +74,6 @@ class Main extends React.Component {
 
         <div className="col-lg-10 col-lg-offset-1">
             <Results nytResults={this.state.results} />
-
         </div>
 
       </div>

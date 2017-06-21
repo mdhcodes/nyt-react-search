@@ -23,16 +23,18 @@ class Results extends React.Component {
           <div className="col-lg-10 col-lg-offset-1">
             <div className="panel panel-default">
               <div className="panel-heading text-center"><h3>Results</h3></div>
-              <div className="panel-body text-center">
+              <div className="panel-body text-center" id="results-well">
 
-                <div className="well" id="results-well">
+
+
+                <div className="well" >
+                  <p>{this.props.nytResults}</p>
+                </div>
 
                   {/* NYT Articles / Results Here */}
-                  {/* Article Title */}
-                  {/* Article URL */}
-                  {/* Article Date */}
-
-                </div>
+                  {/* Article Title: .headline.main */}
+                  {/* Article URL: .web_url */}
+                  {/* Article Date: .date */}
 
               </div>
             </div>

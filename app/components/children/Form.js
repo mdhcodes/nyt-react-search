@@ -19,7 +19,7 @@ class Form extends React.Component {
   handleChange(e) {
     // Handle any change in text within the input fields before form submission
     let newState = {};
-    newState[event.target.id] = event.target.value;
+    newState[e.target.id] = e.target.value;
     this.setState(newState);
   }
 

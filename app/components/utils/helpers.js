@@ -18,7 +18,9 @@ var helpers = {
         'end_date': endYear + '0101'
       }
     }).then(function (response) {
-      console.log(response);
+      console.log('Response', response.data.response.docs);
+      return response.data.response.docs;
+
     }).catch(function (error) {
       console.log(error);
     });
